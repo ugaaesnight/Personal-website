@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Hafidz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Background foto + overlay */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url("background1.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4); /* overlay gelap */
+      z-index: -1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    header {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px 50px;
+    }
+
+    /* Gelombang animasi */
+    .waves {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 150px;
+      background: url('https://svgshare.com/i/ub9.svg') repeat-x;
+      animation: wave 10s linear infinite;
+      z-index: -1;
+    }
+    .waves2 {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 160px;
+      background: url('https://svgshare.com/i/ub9.svg') repeat-x;
+      opacity: 0.5;
+      animation: wave2 15s linear infinite;
+      z-index: -2;
+    }
+    @keyframes wave { from {background-position-x:0;} to {background-position-x:1000px;} }
+    @keyframes wave2 { from {background-position-x:0;} to {background-position-x:-1000px;} }
+
+    /* Foto profil + wave awan */
+    .profile {
+      position: relative;
+      display: inline-block;
+    }
+    .profile img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid #fff;
+      position: relative;
+      z-index: 2;
+    }
+    .profile::before {
+      content: "";
+      position: absolute;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.5), transparent);
+      border-radius: 50%;
+      animation: cloud 6s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    @keyframes cloud { from {transform: scale(1);} to {transform: scale(1.2);} }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+      z-index: 1000;
+    }
+    nav {
+      position: fixed;
+      top: 0; right: -250px;
+      width: 200px;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      transition: right 0.3s ease;
+      padding-top: 60px;
+      z-index: 999;
+    }
+    nav.active { right: 0; }
+    nav a {
+      display: block;
+      color: white;
+      padding: 15px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    nav a i {
+      margin-right: 8px;
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+    nav a:hover i { transform: rotate(20deg); }
+    nav a:hover { background: rgba(255,255,255,0.1); }
+
+    /* Section */
+    section {
+      padding: 60px 20px;
+      margin: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Project Grid */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .project-card {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); }
+    .project-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    /* Skill Bar */
+    .skill {
+      margin: 15px 0;
+    }
+    .skill-name { margin-bottom: 5px; }
+    .skill-bar {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .skill-level {
+      height: 20px;
+      background: #4cafef;
+      width: 0;
+      animation: fillBar 2s forwards;
+    }
+    @keyframes fillBar { from {width:0;} to {width:var(--level);} }
+
+    /* Back to Top */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      background: #4cafef;
+      color: white;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+    }
+    #backToTop:hover { background: #2196f3; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.7);
+      margin-top: 40px;
+    }
+    .social-icons a {
+      color: white;
+      margin: 0 10px;
+      font-size: 20px;
+      transition: transform 0.3s;
+    }
+    .social-icons a:hover { transform: scale(1.2) rotate(10deg); }
+  </style>
+</head>
+<body>
+  <!-- Gelombang -->
+  <div class="waves"></div>
+  <div class="waves2"></div>
+
+  <!-- Hamburger -->
+  <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+  <nav>
+    <a href="#riwayat"><i class="fas fa-history"></i> Riwayat</a>
+    <a href="#ABOUT ME"><i class="fas fa-trophy"></i> ABOUT ME</a>
+    <a href="#project"><i class="fas fa-folder-open"></i> Project</a>
+    <a href="#motivasi"><i class="fas fa-lightbulb"></i> Motivasi</a>
+    <a href="#biodata"><i class="fas fa-user"></i> Biodata</a>
+    <a href="#skill"><i class="fas fa-chart-line"></i> Skill</a>
+    <a href="#kontak"><i class="fas fa-envelope"></i> Kontak</a>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <div class="profile">
+      <img src="Photoprofil.jpeg" alt="Foto Profil">
+    </div>
+    <h1>Hafidz Arohman</h1>
+    <p>Web Developer | Designer | Creator</p>
+  </header>
+
+  <!-- Section -->
+  <section id="riwayat">
+    <h2>Riwayat</h2>
+    <p>SD Negeri 45 Prabumulih - Lulus tahun 2020<br>SMP Negeri 1 Prabumulih - Lulus tahun 2023<br>MAN 1 Prabumulih (Jurusan IPA) - Lulus tahun 2026<br>Universitas Gadjah Mada (S1 Teknik Informatika) OTW</p>
+  </section>
+
+  <section id="ABOUT ME">
+    <h2>ABOUT ME</h2>
+    <p>Halo! Saya Hafidz, seorang web developer yang berfokus pada desain sederhana, fungsional, dan responsif. Saya percaya bahwa teknologi bukan hanya tentang kode, tetapi juga tentang menciptakan solusi yang bermanfaat bagi banyak orang.</p>
+  </section>
+
+  <section id="project">
+    <h2>Project</h2>
+    <div class="projects">
+      <div class="project-card">
+        <img src="piagam1.png" alt="Project 1">
+        <h3>Project 1</h3>
+        <p>PIAGAM PESERTA MINGGUAN PROGRAMER INDONESIA</p>
+      </div>
+      <div class="project-card">
+        <img src="piagam3.jpeg" alt="Project 2">
+        <h3>Project 2</h3>
+        <p>SOLIDARITAS 24</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="motivasi">
+    <h2>Motivasi</h2>
+    <p>"Kerja keras memang tidak instan, tapi hasilnya akan abadi."</p>
+  </section>
+
+  <section id="biodata">
+    <h2>Biodata</h2>
+    <p>Nama Lengkap: Hafidz Arohman<br>Tempat,Tanggal Lahir: Prabumulih, 26 januari 2009<br>Alamat: Jl. Arjuna 1, Prabumulih<br>Jenis Kelamin: Laki-laki<br>Agama: Islam<br>Kewarganegaraan: Indonesia<br>Hobi: Membaca, Menulis, Bermain Game<br>Email: hafidzarohman@gmail.com<br>No. HP: 0896-3403-7416</p>
+  </section>
+
+  <section id="skill">
+    <h2>Skill</h2>
+    <div class="skill">
+      <div class="skill-name">HTML</div>
+      <div class="skill-bar"><div class="skill-level" style="--level:90%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">CSS</div>
+      <div class="skill-bar"><div class="skill-level" style="--level:80%;"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-bar"><div class="skill-level" style="--level:70%;"></div></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak</h2>
+    <p>Email: hafidzarohman@email.com</p>
+    <p>Telepon: 0896-3403-7416</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 H A F I D Z   A R O H M A N</p>
+    <div class="social-icons">
+      <a href="https://www.instagram.com/fixze_26?igsh=Y2dqamF2Zm5xMGlu"><i class="fab fa-instagram"></i></a>
+      <a href="ga ada bro hehe"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/ugaaesnight"><i class="fab fa-github"></i></a>
+      <a href="https://hafidzarohman@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+  <script>
+    // Toggle menu
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Back to top
+    const backToTop = document.getElementById("backToTop");
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTop.style.display = "block";
+      } else {
+        backToTop.style.display = "none";
+      }
+    };
+    backToTop.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+  </script>
+</body>
+</html>
